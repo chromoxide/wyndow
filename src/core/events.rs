@@ -1,7 +1,7 @@
 use crate::core::window::SystemWindow;
 use crate::core::window_builder::WindowConfig;
 
-enum WindowEvent {
+pub(crate) enum WindowEvent {
   Close,
   Resize { w: u32, h: u32 },
   RequestRedraw,
@@ -9,17 +9,17 @@ enum WindowEvent {
   Input(InputEvent),
 }
 
-enum FocusStatus {
+pub(crate) enum FocusStatus {
   Lost,
   Gained,
 }
 
-enum InputEvent {
+pub(crate) enum InputEvent {
   MouseEvent(MouseEvent),
   KeyEvent(KeyEvent)
 }
 
-enum MouseEvent {
+pub(crate) enum MouseEvent {
   MouseMoved { x: i32, y: i32 },
 
   LeftButtonDown { x: i32, y: i32 },
@@ -31,13 +31,13 @@ enum MouseEvent {
   Scroll { delta_x: f32, delta_y: f32 },
 }
 
-enum KeyEvent {
+pub(crate) enum KeyEvent {
   KeyDown { keycode: u32, modifiers: Modifiers },
   KeyUp { keycode: u32, modifiers: Modifiers  },
 }
 
 #[derive(Clone, Copy, Eq, PartialEq)]
-pub struct Modifiers(u8);
+pub(crate) struct Modifiers(u8);
 
 impl Modifiers {
   const SHIFT_MASK: u8 = 1 << 0;
@@ -68,7 +68,7 @@ impl Modifiers {
 }
 
 /// Purely for developer experience 100% optional, provides the most essential events in an exposed manner
-enum FlatEvent {
+pub(crate) enum FlatEvent {
   Close,
   RedrawRequested,
   Resize { w: u32, h: u32 },
